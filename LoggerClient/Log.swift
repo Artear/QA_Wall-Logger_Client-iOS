@@ -10,28 +10,31 @@ import Foundation
 
 public class Log : Serializable{
 
-    public enum TypeService : Int{
+    public enum TypeService : String{
     
         case PERIOD_START, PERIOD_END, EVENT
         
     }
     
     private var id:String = ""
-    private var typeService:TypeService
+    private var deviceId:String = ""
+    private var typeService:String
     private var time:CLong = 0
     private var message:String = ""
     
     /**
-     * @param id      String representing the event (ie: if you are sending a START-END event, both of them will be tied by this id)
-     * @param type    {@link Type Type} indicating the log type;
-     * @param time    Epoch (milliseconds since 1 jan 1970) when the period start;
-     * @param message a message to identify the com.qa_wall_logger_client.log;
+     * @param id        String representing the event (ie: if you are sending a START-END event, both of them will be tied by this id)
+     * @param deviceId  String representing the device that is sending
+     * @param type      {@link Type Type} indicating the log type;
+     * @param time      Epoch (milliseconds since 1 jan 1970) when the period start;
+     * @param message   a message to identify the com.qa_wall_logger_client.log;
      */
     
-    public init(let id:String,let type:TypeService,time:CLong,message:String){
+    public init(let id:String, deviceId:String, let type:TypeService,time:CLong,message:String){
     
         self.id = id
-        self.typeService = type
+        self.deviceId = deviceId
+        self.typeService = type.rawValue
         self.time = time
         self.message = message
         
@@ -44,7 +47,14 @@ public class Log : Serializable{
     
     }
     
-    public func getType() ->TypeService{
+    public func getDeviceId() ->String{
+        
+        return self.deviceId
+        
+    }
+
+    
+    public func getType() ->String{
         
         return self.typeService
         

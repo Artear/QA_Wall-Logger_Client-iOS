@@ -10,32 +10,20 @@ import Foundation
 
 public class RemoteLogger{
 
+    var url:String
     
+    public init(url: String){
     
-    
-    // MARK: - Singleton Pattern
-    
-    class var sharedInstance: RemoteLogger {
+        self.url = url
         
-        struct Singleton {
-            static let instance = RemoteLogger()
-        }
-        
-        return Singleton.instance
     }
     
     
-    
-    
-    public class func send(log : Log){
-        
-        NSJSONSerialization
+    public func send(log : Log){
         
         print("Enviando: \(log.toJsonString())")
         
-        let url:String = "http://www.tn.com.ar"
-        
-        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
+        let request = NSMutableURLRequest(URL: NSURL(string: self.url)!)
         
         request.HTTPBody = log.toJson()
         request.HTTPMethod = "POST"
