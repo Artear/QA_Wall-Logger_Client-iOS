@@ -19,7 +19,7 @@ Supported objects:
 
 import Foundation
 
-public class Serializable: NSObject {
+@objc public class Serializable: NSObject {
     private class SortedDictionary : NSMutableDictionary {
         var dictionary = [String: AnyObject]()
         

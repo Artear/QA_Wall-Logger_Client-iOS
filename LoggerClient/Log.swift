@@ -10,9 +10,18 @@ import Foundation
 
 public class Log : Serializable{
 
-    public enum TypeService : String{
+    @objc public enum TypeService : Int{
     
         case PERIOD_START, PERIOD_END, EVENT
+
+        func name() -> String {
+            switch self {
+            case .PERIOD_START: return "PERIOD_START"
+            case .PERIOD_END: return "PERIOD_END"
+            case .EVENT: return "EVENT"
+            }
+        }
+
         
     }
     
@@ -30,11 +39,12 @@ public class Log : Serializable{
      * @param message   a message to identify the com.qa_wall_logger_client.log;
      */
     
+    @objc(initWithId:deviceId:type:time:message:)
     public init(let id:String, deviceId:String, let type:TypeService,time:CLong,message:String){
     
         self.id = id
         self.deviceId = deviceId
-        self.typeService = type.rawValue
+        self.typeService = type.name()
         self.time = time
         self.message = message
         

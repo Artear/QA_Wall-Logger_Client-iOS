@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class RemoteLogger{
+public class RemoteLogger : NSObject{
 
     var url:String
     
